@@ -1,0 +1,62 @@
+{
+  "isMicroservice": true,
+  "tfVersion": "1.0.0",
+  "baseConfig": [{
+    "ParameterKey": "eks",
+    "ParameterValue": [{
+      "node_group": [{
+        "eks_node_min_size": 4,
+        "eks_node_max_size": 5,
+        "eks_node_desired_size": 4,
+        "eks_node_disk_size": "50",
+        "eks_node_disk_type": "standard",
+        "eks_node_instance_types": "t3.medium"
+      }]
+    }]
+  }, {
+    "ParameterKey": "security_group",
+    "ParameterValue": [{
+      "cidr_blocks": "0.0.0.0/0",
+      "to_port": "80",
+      "from_port": "80",
+      "protocol": "tcp",
+      "description": "TCP 80"
+    }, {
+      "cidr_blocks": "0.0.0.0/0",
+      "from_port": "443",
+      "to_port": "443",
+      "protocol": "tcp",
+      "description": "TCP 443"
+    }]
+  }, {
+    "ParameterKey": "rds",
+    "ParameterValue": [{
+      "db_name": "bloom",
+      "db_engine": "aurora-postgresql",
+      "instance_type": "db.t3.medium"
+    }]
+  }, {
+    "ParameterKey": "ssm",
+    "ParameterValue": [{
+      "name": "UserName",
+      "value": "bloom",
+      "type": "String",
+      "description": "test"
+    }, {
+      "name": "pat",
+      "value": "pditpysofcoursethisisnotavalidpatz45bi32qpkhlvlmbntr",
+      "type": "SecureString",
+      "description": "test"
+    }]
+  }, {
+    "ParameterKey": "s3",
+    "ParameterValue": [{
+      "bucket_count": 1
+    }]
+  }],
+  "tokenSupplied": false,
+  "iacFramework": "terraform",
+  "whetherCIDoneByBloom": false,
+  "whetherInfraByBloom": true,
+  "deploymentPattern": "Kubernetes"
+}
